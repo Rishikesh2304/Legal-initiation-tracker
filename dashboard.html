@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Legal Initiation Tracker</title>
+  <link rel="stylesheet" href="dash.css" />
+</head>
+<body>
+  <div class="bg-wrapper">
+    <img src="tracker.png" alt="Background" />
+    <div class="dashboard-wrapper">
+      <header>
+        <button class="back-btn" onclick="goBack()">&#8592; Back</button>
+        <h1>Administrative Panel – Legal Tracker</h1>
+        <button class="settings-btn" onclick="toggleSettings()">⚙️ Settings</button>
+      </header>
+
+      <section id="settings-panel" class="settings-panel hidden">
+        <h2>Download Report</h2>
+
+        <!-- Replaced separate inputs with a single date picker -->
+        <label for="report-date">Select Date:</label>
+        <input type="date" id="report-date" />
+
+        <div class="settings-buttons">
+          <button class="login-btn" onclick="downloadCSV()">Download CSV</button>
+          <button class="login-btn" onclick="showRecords()">Show Records</button>
+          <button class="login-btn" onclick="addRecord()">Add Records Manually</button>
+          <button class="login-btn" onclick="goToInvoicePage()">Go to Invoice Panel</button>
+        </div>
+
+        <div id="record-output" class="record-output"></div>
+        <div id="manual-records" class="record-output" style="display: none;"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice Sender Tool</title>
+  <link rel="stylesheet" href="range.css" />
+</head>
+<body>
+  <div class="bg-wrapper">
+    <img src="tracker.png" alt="Background" />
+    <div class="invoice-wrapper">
+      <button class="back-btn" onclick="goBack()">&#8592; Back</button>
+      <h1>Invoice Sender Tool</h1>
+      <p>Please enter the date range for which email invoices need to be sent:</p>
+
+      <form id="invoiceForm">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start-date" required />
+
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end-date" required />
+
+        <button type="submit" class="send-btn">Send Invoices</button>
+      </form>
+
+      <div id="confirmation" class="hidden"></div>
+    </div>
+  </div>
+
+  <script>
+    // JS logic placed here so it's self-contained
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("invoiceForm");
+      const confirmation = document.getElementById("confirmation");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const fromDate = document.getElementById("start-date").value;
+        const toDate = document.getElementById("end-date").value;
+
+        if (!fromDate || !toDate) {
+          alert("Please select both start and end dates.");
+          return;
+        }
+
+        if (fromDate > toDate) {
+          alert("Start date cannot be after end date.");
+          return;
+        }
+
+        confirmation.textContent = `✅ Invoices for mails from ${fromDate} to ${toDate} are now marked for sending.`;
+        confirmation.classList.remove("hidden");
+        confirmation.classList.add("success-message");
+
+        form.reset();
+      });
+    });
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

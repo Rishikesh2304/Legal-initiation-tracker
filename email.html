@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legal Initiation Tracker - Login</title>
+  <link rel="stylesheet" href="legal.css" />
+</head>
+<body>
+  <div class="bg-wrapper">
+    <img src="tracker.png" alt="Background" />
+    <div class="form-container">
+      <h1>Legal Initiation Tracker</h1>
+      <input type="email" id="email-input" class="email-input" placeholder="Enter Email ID" />
+      <div class="buttons">
+        <button class="add-btn" onclick="addEmail()">Add Email</button>
+        <button class="clear-btn" onclick="clearEmails()">Clear</button>
+        <button class="login-btn" onclick="redirectToDashboard()">Login</button>
+      </div>
+      <ul class="email-list" id="email-list"></ul>
+      <p class="footer-note">INITIATE RIGHT · TRACK SMART</p>
+    </div>
+  </div>
+  <script>
+    const emailInput = document.getElementById("email-input");
+    const emailList = document.getElementById("email-list");
+    const emails = [];
+
+    function addEmail() {
+      const email = emailInput.value.trim();
+      if (email && !emails.includes(email)) {
+        emails.push(email);
+        const li = document.createElement("li");
+        li.textContent = email;
+        emailList.appendChild(li);
+        emailInput.value = "";
+        emailInput.focus();
+      } else if (emails.includes(email)) {
+        alert("Email already added.");
+      } else {
+        alert("Please enter a valid email.");
+      }
+    }
+    function clearEmails() 
+    {
+         emailInput.value = "";
+         emails.length = 0; // Clear the array
+         emailList.innerHTML = ""; // Clear the UI list
+    }
+
+    function redirectToDashboard() {
+      const email = emailInput.value.trim();
+      if (email) addEmail();
+
+      if (emails.length > 0) {
+        localStorage.setItem("emails", JSON.stringify(emails));
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Please enter at least one email ID before logging in.");
+      }
+    }
+  </script>
+</body>
+</html>
